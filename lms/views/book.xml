@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--This attribute specifies a unique identifier for the record. It's used to refer to this record from other parts of the system.-->
+    <record id="view_library_book_form" model="ir.ui.view">
+<!--    This attribute is a human-readable name for the record. It's often used for display purposes in the Odoo user interface.-->
+        <field name="name">library.book.detail.form</field>
+<!--    This attribute indicates the Odoo model to which the record belongs. It specifies the Python class that represents this record in the Odoo system.-->
+        <field name="model">library.book.detail</field>
+<!--   This attribute contains the XML code that defines the structure and layout of the record. It specifies how the record should be presented or rendered in the user interface.-->
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Report" type="object" name="print_book_details"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="author"/>
+                            <field name="status"/>
+                            <field name="transaction_ids" widget="one2many_list" delete="False" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.detail.tree</field>
+        <field name="model">library.book.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="author"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_library_book" model="ir.actions.act_window">
+        <field name="name">Book Detail</field>
+<!--    The type attribute indicates the type of action. In this case, it's set to "ir.actions.act_window," which means it's a window action. Window actions are used to open specific views or forms in the user interface.-->
+        <field name="type">ir.actions.act_window</field>
+<!--    The res_model attribute specifies the target model for this action. It indicates the Odoo model on which this action will operate. In this example, it's "library.book.detail," indicating that this action is related to book details.-->
+        <field name="res_model">library.book.detail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_library_book"
+              name="Book Detail"
+              parent="menu_library_root"
+              action="action_library_book"
+              sequence="8"/>
+</odoo>

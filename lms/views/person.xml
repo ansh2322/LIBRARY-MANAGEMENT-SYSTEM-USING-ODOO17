@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_library_person_form" model="ir.ui.view">
+        <field name="name">librarian.detail.form</field>
+        <field name="model">librarian.detail</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Report" type="object" name="print_librarian_details"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="role" widget="selection" default="'Librarian'"/>
+                        <field name="transaction_count"/>
+                        <field name="transaction_ids" widget="one2many_list" readonly="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_person_tree" model="ir.ui.view">
+        <field name="name">librarian.detail.tree</field>
+        <field name="model">librarian.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="role"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_library_person" model="ir.actions.act_window">
+        <field name="name">Librarian Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">librarian.detail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_person_detail"
+              name="Person Detail"
+              parent="menu_library_root"
+              action="action_library_person"
+              sequence="9"/>
+    <menuitem id="menu_library_person"
+              name="Librarian Detail"
+              parent="menu_person_detail"
+              action="action_library_person"
+              sequence="10"/>
+</odoo>

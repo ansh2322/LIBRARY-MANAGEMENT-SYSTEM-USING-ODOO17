@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_library_transactions_form" model="ir.ui.view">
+        <field name="name">library.transactions.form</field>
+        <field name="model">library.transactions</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Report" type="object" name="print_transaction_details"/>
+                </header>
+                <header>
+                    <button string="CONFIRM" type="object" class="oe_highlight" name="set_confirm" invisible="status != 'draft'" />
+                    <button string="BORROW" type="object" class="oe_highlight" name="set_borrowed" invisible="status != 'confirm'"/>
+                    <button string="RETURN" type="object" class="oe_highlight" name="set_returned" invisible="status != 'borrowed'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,confirm,borrowed,returned"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="book_id" readonly="status == 'returned'"/>
+                        <field name="author" />
+                        <field name="person_id" readonly="status == 'returned'"/>
+                        <field name="student_id" readonly="status == 'returned'"/>
+                        <field name="issue_date" readonly="status == 'returned'"/>
+                        <field name="return_date" readonly="status == 'returned'"/>
+                    </group>
+                </sheet>
+<!--            This is used to explain the chatter to display-->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_transactions_tree" model="ir.ui.view">
+        <field name="name">library.transactions.tree</field>
+        <field name="model">library.transactions</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="book_id"/>
+                <field name="author"/>
+                <field name="person_id"/>
+                <field name="student_id"/>
+                <field name="issue_date"/>
+                <field name="return_date"/>
+                <field name="status" decoration-success="status == 'returned'" decoration-info="status in ('confirm')" decoration-danger="status in ('borrowed')" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_library_transactions" model="ir.actions.act_window">
+        <field name="name">Transaction </field>
+        <field name="name">Transaction Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">library.transactions</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_library_transactions"
+              name="Transaction Detail"
+              parent="menu_library_root"
+              action="action_library_transactions"
+              sequence="10"/>
+</odoo>
+<!--chatter done-->
+<!--greeen,red,grey done-->
+<!--a student and a librarian how many transaction have done-->
+<!--display both librarian and student detail in person detail menu-->

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_librarian_details">
+        <t t-call="web.external_layout">
+            <div class="book-header text-center">
+                <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+            </div>
+            <div class="librarian-path">
+                <img src="lms/static/src/image/image.png" width="100" height="100"/>
+                <div class="address text-center">
+                    <p>Address: Ukhra, West Bengal</p>
+                    <p>Phone: 9856325666</p>
+                    <hr></hr>
+                </div>
+            </div>
+            <main class="main-content">
+                <div class="librarian-details">
+                    <p>Title:
+                        <t t-esc="docs.name"/>
+                    </p>
+                    <p>Author:
+                        <t t-esc="docs.role"/>
+                    </p>
+                    <div>
+                        <h3>Librarian Transaction</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Book</th>
+                                    <th>Author</th>
+                                    <th>Librarian</th>
+                                    <th>Student</th>
+                                    <th>Issue_Date</th>
+                                    <th>Return Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="docs.transaction_ids" t-as="transaction">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="transaction.book_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.author"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.person_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.student_id.name"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.issue_date"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.return_date"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="transaction.status"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </main>
+            <div class="after_footer">
+                <hr></hr>
+                <p>Thank You</p>
+            </div>
+        </t>
+    </template>
+<!--This tag is used to define a new record in the Odoo database or to update an existing one.-->
+    <record id="action_report_librarian_details" model="ir.actions.report">  <!-- id="action_report_book_details": It specifies a unique identifier for this record.)(model="ir.actions.report": It indicates that this record is of the type "ir.actions.report", which is used for defining report actions in Odoo.-->
+<!--    This field sets the human-readable name for the report action.-->
+        <field name="name">Library Librarian Detail Report</field>
+<!--    This field specifies the model for which the report is designed. In this case, it's "library.book.detail".-->
+        <field name="model">librarian.detail</field>
+<!--    It defines the type of report. In this case, it's a QWeb PDF report.-->
+        <field name="report_type">qweb-pdf</field>
+<!--    This field contains the technical name of the report. It is often used to reference the report in code.-->
+        <field name="report_name">lms.report_librarian_details</field>
+<!--    This field specifies the file name of the report.        -->
+        <field name="report_file">lms.report_librarian_details</field>
+<!--    This sets the name that will be displayed when printing the report.        -->
+        <field name="print_report_name">"Librarian Detail"</field>
+<!--    This field establishes a binding between the report and a specific model. It references the model with the external ID "model_library_book_detail".        -->
+        <field name="binding_model_id" ref="model_librarian_detail"/>
+<!--    It specifies the type of binding. In this case, it indicates that it is a report binding.        -->
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
+
+
+        <!--<?xml version="1.0" encoding="utf-8" ?>-->
+        <!--<odoo>-->
+        <!--    <template id="report_book_details">-->
+        <!--        <t t-call="web.external_layout">-->
+        <!--            <div class="main-content">-->
+        <!--                <div class="book-details">-->
+        <!--                    <t t-foreach="docs" t-as="book">-->
+        <!--                        <p>Title: <t t-esc="book.name" /></p>-->
+        <!--                        <p>Author: <t t-esc="book.author" /></p>-->
+        <!--                        &lt;!&ndash; Add more fields as needed &ndash;&gt;-->
+        <!--                    </t>-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <!--            &lt;!&ndash; Add a button within the template &ndash;&gt;-->
+        <!--            <button type="object" class="oe_highlight" name="print_book_details">Print Book Details</button>-->
+        <!--        </t>-->
+        <!--    </template>-->
+
+
+        <!--    <record id="action_report_book_details" model="ir.actions.report">-->
+        <!--        <field name="name">Print Book Details</field>-->
+        <!--        <field name="model">library.book.detail</field>-->
+        <!--        <field name="report_type">qweb-pdf</field>-->
+        <!--        <field name="report_name">lms.report_book_details</field>-->
+        <!--        <field name="report_file">lms.report_book_details</field>-->
+        <!--        <field name="print_report_name">Book Details</field>-->
+        <!--        <field name="binding_model_id" ref="lms.model_library_book_detail"/>-->
+        <!--        <field name="binding_type">report</field>-->
+        <!--    </record>-->
+        <!--</odoo>-->

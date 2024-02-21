@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_librar_person_form" model="ir.ui.view">
+        <field name="name">student.detail.form</field>
+        <field name="model">student.detail</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print Report" type="object" name="print_student_details"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="role" widget="selection" default="'Student'"/>
+                        <field name="transaction_count"/>
+                        <field name="transaction_ids" widget="one2many_list" readonly="True"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_librar_person_tree" model="ir.ui.view">
+        <field name="name">student.detail.tree</field>
+        <field name="model">student.detail</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="role"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_librar_person" model="ir.actions.act_window">
+        <field name="name">Student Detail</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">student.detail</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_librar_person"
+              name="Student Detail"
+              parent="menu_person_detail"
+              action="action_librar_person"
+              sequence="10"/>
+</odoo>

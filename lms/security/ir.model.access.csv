@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+lms.access_library_book_detail,access_library_book_detail,lms.model_library_book_detail,base.group_user,1,1,1,1
+lms.access_librarian_detail,access_librarian_detail,lms.model_librarian_detail,base.group_user,1,1,1,1
+lms.access_student_detail,access_student_detail,lms.model_student_detail,base.group_user,1,1,1,1
+lms.access_library_transactions,access_library_transactions,lms.model_library_transactions,base.group_user,1,1,1,1
